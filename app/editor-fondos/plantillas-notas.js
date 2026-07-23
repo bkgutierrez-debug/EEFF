@@ -1,6 +1,7 @@
 // Plantillas de notas: se usan para poblar un fondo nuevo con su
 // listado inicial de notas (núcleo + obligatorias + condicionales
-// según el perfil elegido).
+// según el perfil elegido). Lo usan tanto el editor real
+// (editor-fondos.jsx) como el de prueba (editor-fondos-demo.jsx).
 
 export const NUCLEO_TEMPLATE = [
   { title: "Declaración de cumplimiento normativo", content: "Los presentes estados financieros han sido preparados de acuerdo con Normas Internacionales de Información Financiera (NIIF/IFRS) e instrucciones de la Comisión para el Mercado Financiero (CMF), en concordancia con la Circular N°1998 de 2010." },
@@ -36,6 +37,7 @@ export const KIND_LABEL = { nucleo: "Núcleo", obligatoria: "Obligatoria", condi
 
 // Construye las filas de notas (sin id, lo asigna Supabase) listas para
 // insertar en la base de datos cuando se crea un fondo nuevo.
+// La usa únicamente editor-fondos.jsx (el editor real).
 export function buildInitialNoteRows(fundId, profile) {
   let position = 0;
   const rows = [];

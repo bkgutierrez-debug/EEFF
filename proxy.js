@@ -4,6 +4,12 @@ import { createServerClient } from "@supabase/ssr";
 // Se ejecuta antes de cada página: refresca la sesión de Supabase y
 // bloquea el acceso a quien no haya iniciado sesión (lo manda a /login).
 export async function proxy(request) {
+  // Modo demo: solo existe en desarrollo local (nunca en producción/Vercel,
+  // porque ahí NODE_ENV siempre es "production"). Deja pasar sin pedir login.
+  if (request.nextUrl.pathname.startsWith("/demo") && process.env.NODE_ENV !== "production") {
+    return NextResponse.next({ request });
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

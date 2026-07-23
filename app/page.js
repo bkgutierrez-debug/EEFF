@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import EeffEditor from "@/components/EeffEditor";
+import EditorFondos from "./editor-fondos/editor-fondos";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -15,5 +15,5 @@ export default async function Home() {
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
 
-  return <EeffEditor userEmail={user.email} role={profile?.role ?? "revisor"} />;
+  return <EditorFondos userEmail={user.email} role={profile?.role ?? "revisor"} />;
 }
